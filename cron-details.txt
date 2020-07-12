@@ -4,14 +4,14 @@
 #00 01 * * * nohup bash /opt/Automysqlbackup/automysqlbackup /etc/automysqlbackup/remote_db10.conf &>>/opt/backup_db10/logs/`date +\%Y-\%m-\%d-\%H-\%M-\%S`.log
 * * * * * sleep 10; sh /opt/metrics/metrics.sh
 #* * * * * sleep 30; cat /opt/metrics/mysql-metrics.txt | curl --data-binary @- http://localhost:9091/metrics/job/mysql_status_metrics
-* * * * * sleep 30; cat /opt/metrics/mysql-metrics.txt | curl --data-binary @- 10.4.198.5:9091/metrics/job/mysql_status_metrics
+* * * * * sleep 30; cat /opt/metrics/mysql-metrics.txt | curl --data-binary @- privateip:9091/metrics/job/mysql_status_metrics
 #* * * * * sleep 900; bash /opt/GCP-cloud-sql-metrics/gcp-backup-details.sh
 
-* * * * * sleep 30; cat /opt/GCP-cloud-sql-metrics/cloudsql-metrics-final.txt| curl --data-binary @- 10.4.198.5:9095/metrics/job/gcp_cloudsql_status_metrics
+* * * * * sleep 30; cat /opt/GCP-cloud-sql-metrics/cloudsql-metrics-final.txt| curl --data-binary @- privateip:9095/metrics/job/gcp_cloudsql_status_metrics
 #* * * * * sleep 300; cat /opt/GCP-cloud-sql-metrics/cloudsql-metrics.txt | curl --data-binary @- http://localhost:9091/metrics/job/gcp_cloudsql_status_metrics
 
 * * * * * sleep 900; bash /opt/AWS-rds-metrics/aws-RdsBackup-details.sh
-* * * * * sleep 30; cat /opt/AWS-rds-metrics/rds-metrics.txt | curl --data-binary @- 10.4.198.5:9095/metrics/job/aws_rds_status_metrics
+* * * * * sleep 30; cat /opt/AWS-rds-metrics/rds-metrics.txt | curl --data-binary @-privateip:9095/metrics/job/aws_rds_status_metrics
 #* * * * * sleep 60; cat /opt/AWS-rds-metrics/rds-metrics.txt | curl --data-binary @- http://localhost:9091/metrics/job/aws_rds_status_metrics
 You have mail in /var/spool/mail/root
 
